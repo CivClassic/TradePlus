@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MenuButton {
 
-  private MenuAction action;
-  private ItemFactory icon;
+	private MenuAction action;
+	private ItemFactory icon;
+
 }

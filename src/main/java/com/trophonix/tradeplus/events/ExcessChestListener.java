@@ -10,23 +10,26 @@ import org.bukkit.inventory.ItemStack;
 
 public class ExcessChestListener implements Listener {
 
-  private TradePlus pl;
+	private TradePlus pl;
 
-  public ExcessChestListener(TradePlus pl) {
-    this.pl = pl;
-    pl.getServer().getPluginManager().registerEvents(this, pl);
-  }
+	public ExcessChestListener(TradePlus pl) {
+		this.pl = pl;
+		pl.getServer().getPluginManager().registerEvents(this, pl);
+	}
 
-  @EventHandler
-  public void onClose(InventoryCloseEvent event) {
-    Inventory closed = event.getInventory();
+	@EventHandler
+	public void onClose(InventoryCloseEvent event) {
+		Inventory closed = event.getInventory();
 
-    if (pl.getExcessChests().contains(closed)) {
-      for (ItemStack i : event.getInventory()) {
-        if (i == null || i.getType() == Material.AIR) continue;
-        event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), i);
-      }
-      pl.getExcessChests().remove(closed);
-    }
-  }
+		if (pl.getExcessChests().contains(closed)) {
+			for (ItemStack i : event.getInventory()) {
+				if (i == null || i.getType() == Material.AIR) {
+					continue;
+				}
+				event.getPlayer().getWorld().dropItemNaturally(event.getPlayer().getLocation(), i);
+			}
+			pl.getExcessChests().remove(closed);
+		}
+	}
+
 }
