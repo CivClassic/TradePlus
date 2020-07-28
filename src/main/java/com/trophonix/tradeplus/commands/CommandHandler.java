@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.commands;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -18,9 +18,9 @@ public class CommandHandler implements Listener, CommandExecutor {
 	@Getter
 	private List<Command> commands = new ArrayList<>();
 
-	public CommandHandler(TradePlus pl, boolean compatMode) {
+	public CommandHandler(TradePlusPlugin plugin, boolean compatMode) {
 		if (!compatMode) {
-			pl.getServer().getPluginManager().registerEvents(this, pl);
+			plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		}
 		try {
 			Class.forName("org.bukkit.event.server.TabCompleteEvent");
@@ -30,7 +30,7 @@ public class CommandHandler implements Listener, CommandExecutor {
 					Command command = commands.stream().filter(c -> c.isAlias(cmd)).findFirst().orElse(null);
 					return command != null ? command.onTabComplete(sender, args, buffer) : null;
 				}
-			}, pl);
+			}, plugin);
 		}
 		catch (ClassNotFoundException ignored) {
 		}

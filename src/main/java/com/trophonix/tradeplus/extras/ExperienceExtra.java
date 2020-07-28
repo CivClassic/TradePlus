@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.extras;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import com.trophonix.tradeplus.trade.Trade;
 import com.trophonix.tradeplus.util.ItemFactory;
 import com.trophonix.tradeplus.util.XP;
@@ -11,7 +11,7 @@ public class ExperienceExtra extends Extra {
 
 	private boolean levelMode;
 
-	public ExperienceExtra(Player player1, Player player2, TradePlus pl, Trade trade) {
+	public ExperienceExtra(Player player1, Player player2, TradePlusPlugin pl, Trade trade) {
 		super("experience", player1, player2, pl, trade);
 		levelMode = pl.getConfig().getBoolean("extras.experience.levelMode", false);
 	}

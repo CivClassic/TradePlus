@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.commands;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import com.trophonix.tradeplus.trade.Trade;
 import com.trophonix.tradeplus.util.MsgUtils;
 import java.util.Arrays;
@@ -13,39 +13,39 @@ import org.bukkit.entity.Player;
 
 public class TradePlusCommand extends Command {
 
-	private final TradePlus pl;
+	private final TradePlusPlugin plugin;
 	private List<String> arg0 = Arrays.asList("reload", "rl", "force", "spectate");
 
-	public TradePlusCommand(TradePlus pl) {
+	public TradePlusCommand(TradePlusPlugin plugin) {
 		super(Collections.singletonList("tradeplus"));
-		this.pl = pl;
+		this.plugin = plugin;
 	}
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 		if (!sender.hasPermission("tradeplus.admin")) {
-			pl.getTradeConfig().getErrorsNoPermsAdmin().send(sender);
+			plugin.getTradeConfig().getErrorsNoPermsAdmin().send(sender);
 			return;
 		}
 
 		switch (args.length) {
 			case 1:
 				if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
-					pl.reload();
-					pl.getTradeConfig().getAdminConfigReloaded().send(sender);
+					plugin.reload();
+					plugin.getTradeConfig().getAdminConfigReloaded().send(sender);
 					return;
 				}
 				break;
 			case 2:
-				if (pl.getTradeConfig().isSpectateEnabled() && args[0].equalsIgnoreCase("spectate")) {
+				if (plugin.getTradeConfig().isSpectateEnabled() && args[0].equalsIgnoreCase("spectate")) {
 					Player player = Bukkit.getPlayer(args[1]);
 					if (player == null || !player.isOnline()) {
-						pl.getTradeConfig().getAdminInvalidPlayers().send(sender);
+						plugin.getTradeConfig().getAdminInvalidPlayers().send(sender);
 						return;
 					}
-					Trade trade = pl.getTrade(player);
+					Trade trade = plugin.getTrade(player);
 					if (trade == null) {
-						pl.getTradeConfig().getAdminNoTrade().send(player);
+						plugin.getTradeConfig().getAdminNoTrade().send(player);
 					}
 					else {
 						player.openInventory(trade.getSpectatorInv());
@@ -58,14 +58,14 @@ public class TradePlusCommand extends Command {
 					Player p1 = Bukkit.getPlayer(args[1]);
 					Player p2 = Bukkit.getPlayer(args[2]);
 					if (p1 == null || p2 == null || !p1.isOnline() || !p2.isOnline() || p1.equals(p2)) {
-						pl.getTradeConfig().getAdminInvalidPlayers().send(sender);
+						plugin.getTradeConfig().getAdminInvalidPlayers().send(sender);
 						return;
 					}
-					pl.getTradeConfig()
+					plugin.getTradeConfig()
 							.getAdminForcedTrade()
 							.send(sender, "%PLAYER1%", p1.getName(), "%PLAYER2%", p2.getName());
-					pl.getTradeConfig().getForcedTrade().send(p1, "%PLAYER%", p2.getName());
-					pl.getTradeConfig().getForcedTrade().send(p2, "%PLAYER%", p1.getName());
+					plugin.getTradeConfig().getForcedTrade().send(p1, "%PLAYER%", p2.getName());
+					plugin.getTradeConfig().getForcedTrade().send(p2, "%PLAYER%", p1.getName());
 					Trade trade = new Trade(p1, p2);
 					if (sender instanceof Player && !(sender.equals(p1) || sender.equals(p2))) {
 						((Player) sender).openInventory(trade.getSpectatorInv());
@@ -74,19 +74,19 @@ public class TradePlusCommand extends Command {
 				}
 				else if (args[0].equalsIgnoreCase("spectate")) {
 					if (!(sender instanceof Player)) {
-						pl.getTradeConfig().getAdminPlayersOnly().send(sender);
+						plugin.getTradeConfig().getAdminPlayersOnly().send(sender);
 						return;
 					}
 					Player player = (Player) sender;
 					Player p1 = Bukkit.getPlayer(args[1]);
 					Player p2 = Bukkit.getPlayer(args[2]);
 					if (p1 == null || p2 == null || !p1.isOnline() || !p2.isOnline() || p1.equals(p2)) {
-						pl.getTradeConfig().getAdminInvalidPlayers().send(sender);
+						plugin.getTradeConfig().getAdminInvalidPlayers().send(sender);
 						return;
 					}
-					Trade trade = pl.getTrade(p1, p2);
+					Trade trade = plugin.getTrade(p1, p2);
 					if (trade == null) {
-						pl.getTradeConfig().getAdminNoTrade().send(player);
+						plugin.getTradeConfig().getAdminNoTrade().send(player);
 					}
 					else {
 						player.openInventory(trade.getSpectatorInv());
@@ -96,7 +96,7 @@ public class TradePlusCommand extends Command {
 				break;
 		}
 		MsgUtils.send(sender, new String[] {"&6&l<----- Trade+ by Trophonix ----->", "&e/trade <player> &fSend a trade request", "&e/tradeplus reload &fReload config files", "&e/tradeplus force <player1> <player2> &fForce 2 players to trade"});
-		if (pl.getTradeConfig().isSpectateEnabled()) {
+		if (plugin.getTradeConfig().isSpectateEnabled()) {
 			MsgUtils.send(sender, "&e/tradeplus spectate <player(s)> &fSpectate an ongoing trade");
 		}
 	}

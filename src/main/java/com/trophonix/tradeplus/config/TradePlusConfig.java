@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.config;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import com.trophonix.tradeplus.util.ItemFactory;
 import com.trophonix.tradeplus.util.Sounds;
 import java.io.File;
@@ -17,7 +17,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 @Getter
 public class TradePlusConfig {
 
-	private TradePlus plugin;
+	private TradePlusPlugin plugin;
 
 	private File configFile;
 	private FileConfiguration config;
@@ -86,9 +86,8 @@ public class TradePlusConfig {
 	private ConfigMessage discrepancyDetected;
 
 	private ConfigMessage adminConfigReloaded, adminInvalidPlayers, adminForcedTrade, adminPlayersOnly, adminNoTrade;
-	private ConfigMessage factionsEnemyTerritory, worldguardTradingNotAllowed;
 
-	public TradePlusConfig(TradePlus plugin) {
+	public TradePlusConfig(TradePlusPlugin plugin) {
 		this.plugin = plugin;
 	}
 
@@ -151,9 +150,6 @@ public class TradePlusConfig {
 		extrasTypeInvalid = ChatColor.translateAlternateColorCodes('&', config.getString("extras.type.invalid", "&cInvalid amount entered!"));
 		extrasTypeMaximum = ChatColor.translateAlternateColorCodes('&', config.getString("extras.type.maximum", "&cYou have %BALANCE% %EXTRA%"));
 
-		factionsAllowTradeInEnemyTerritory = config.getBoolean("hooks.factions.allow-trades-in-enemy-territory", false);
-		worldguardTradingFlag = config.getBoolean("hooks.worldguard.trading-flag", true);
-
 		soundEffectsEnabled = config.getBoolean("soundeffects.enabled", true);
 		soundOnChange = config.getBoolean("soundeffects.onchange", true);
 		soundOnAccept = config.getBoolean("soundeffects.onaccept", true);
@@ -199,9 +195,6 @@ public class TradePlusConfig {
 		adminForcedTrade = new ConfigMessage(lang, "admin.forced-trade", "&6&l(!) &6You forced a trade between &e%PLAYER1% &6and &e%PLAYER2%");
 		adminPlayersOnly = new ConfigMessage(lang, "admin.players-only", "&4&l(!) &4This command is for players only.");
 		adminNoTrade = new ConfigMessage(lang, "admin.no-trade", "&4&l(!) &4This command is for players only.");
-
-		factionsEnemyTerritory = new ConfigMessage(lang, "hooks.factions.enemy-territory", "&4&l(!) &4You can't trade in enemy territory!");
-		worldguardTradingNotAllowed = new ConfigMessage(lang, "hooks.worldguard.trading-not-allowed", "&4&l(!) &4You can't trade in this area.");
 
 		debugMode = config.getBoolean("debug-mode", false);
 

@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.util;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,9 +14,9 @@ public class InvUtils {
 
 	public static final List<Integer> leftSlots = new LinkedList<>(Arrays.asList(1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 27, 28, 29, 30, 36, 37, 38, 39, 45, 46, 47, 48));
 
-	private static TradePlus pl;
+	private static TradePlusPlugin pl;
 
-	public static void reloadItems(TradePlus pl) {
+	public static void reloadItems(TradePlusPlugin pl) {
 		InvUtils.pl = pl;
 	}
 

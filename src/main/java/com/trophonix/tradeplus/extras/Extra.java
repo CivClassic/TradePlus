@@ -1,7 +1,7 @@
 package com.trophonix.tradeplus.extras;
 
 import com.google.common.base.Preconditions;
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import com.trophonix.tradeplus.trade.Trade;
 import com.trophonix.tradeplus.util.ItemFactory;
 import com.trophonix.tradeplus.util.Sounds;
@@ -34,14 +34,14 @@ public abstract class Extra implements Listener {
 	double increment2;
 	@Getter
 	private String displayName;
-	private TradePlus pl;
+	private TradePlusPlugin pl;
 	private double max1;
 	private double max2;
 	private long lastUpdatedMax = System.currentTimeMillis();
 	private String mode;
 	private Trade trade;
 
-	Extra(String name, Player player1, Player player2, TradePlus pl, Trade trade) {
+	Extra(String name, Player player1, Player player2, TradePlusPlugin pl, Trade trade) {
 		this.pl = pl;
 		this.name = name;
 		ConfigurationSection section = Preconditions.checkNotNull(pl.getConfig()

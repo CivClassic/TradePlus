@@ -1,10 +1,12 @@
 package com.trophonix.tradeplus.trade;
 
+import lombok.Data;
 import org.bukkit.entity.Player;
 
 /**
  * Created by lucas on 5/26/16.
  */
+@Data
 public class TradeRequest {
 
 	public final Player sender;

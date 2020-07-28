@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.trade;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import com.trophonix.tradeplus.util.PlayerUtil;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +16,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class InteractListener implements Listener {
 
-	private final TradePlus pl;
+	private final TradePlusPlugin pl;
 
 	private Map<UUID, Long> lastTrigger = new HashMap<>();
 
-	public InteractListener(TradePlus pl) {
+	public InteractListener(TradePlusPlugin pl) {
 		this.pl = pl;
 	}
 

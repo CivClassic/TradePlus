@@ -1,7 +1,7 @@
 package com.trophonix.tradeplus.util;
 
 import com.google.common.base.Preconditions;
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class ItemFactory {
 			Material mat = Material.getMaterial(parsable);
 			if (mat == null) {
 				mat = fallback;
-				TradePlus.getPlugin(TradePlus.class)
+				TradePlusPlugin.getPlugin(TradePlusPlugin.class)
 						.getLogger()
 						.warning("Unknown material [" + parsable + "]." + (Sounds.version >= 113 ? " Make sure you've updated to the new 1.13 standard. Numerical item IDs are no longer supported. Using fallback: " + fallback
 								.name() : ""));

@@ -1,6 +1,6 @@
 package com.trophonix.tradeplus.events;
 
-import com.trophonix.tradeplus.TradePlus;
+import com.trophonix.tradeplus.TradePlusPlugin;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class ExcessChestListener implements Listener {
 
-	private TradePlus pl;
+	private TradePlusPlugin pl;
 
-	public ExcessChestListener(TradePlus pl) {
+	public ExcessChestListener(TradePlusPlugin pl) {
 		this.pl = pl;
 		pl.getServer().getPluginManager().registerEvents(this, pl);
 	}
