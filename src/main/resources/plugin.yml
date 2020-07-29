@@ -2,6 +2,7 @@ name: TradePlus
 version: ${project.version}
 authors: [Trophonix, Protonull]
 main: com.trophonix.tradeplus.TradePlusPlugin
+depend: [CivModCore]
 api-version: "1.16"
 commands:
   trade:
